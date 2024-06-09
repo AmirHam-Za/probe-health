@@ -41,15 +41,15 @@
         <div class="container mx-auto">
             <div class="flex justify-between px-10 text-gray-100 font-semibold">
                 <div class="hidden md:flex">
-                    <ul class="flex gap-4  my-2">
+                    <ul class="flex gap-4  my-2 list-none">
                         <li class=" hover:border-b-2"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="">About us</li>
+                        <li class=" hover:border-b-2"><a href="{{ route('services') }}">Centers</a></li>
+                        <li class=" hover:border-b-2"><a href="{{ route('center') }}">Centers</a></li>
                         <li class=" hover:border-b-2"><a href="{{ route('find-test') }}">Find a Test</a></li>
                         <li class=" hover:border-b-2"><a href="{{ route('home-collection') }}">Home Collection</a></li>
                         <li class=" hover:border-b-2"><a href="{{ route('find-doctor') }}">Consult a doctor</a></li>
-                        <li>About us</li>
-                        <li>Service</li>
-                        <li>Centers</li>
-                        <li>Health packages</li>
+                        <li class=" hover:border-b-2"><a href="{{ route('health.package') }}">Health packages</a></li>
                         <li>Contact us</li>
                     </ul>
                 </div>

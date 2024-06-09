@@ -30,7 +30,7 @@
     </script>
 
     {{-- CSS --}}
-    <link rel="stylesheet" href="{{ url('resources/css/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ url('resources/css/style.css') }}"> --}}
 
     {{-- roboto font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
