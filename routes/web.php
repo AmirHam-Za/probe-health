@@ -1,17 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('home');
@@ -60,5 +53,21 @@ Route::get('/customer-care', function () {
 Route::get('/team-of-experts', function () {
     return view('about-us.team-of-experts');
 })->name('experts.team');
+
+
+Route::get('/create-user', function () {
+
+    if (!User::where('email', 'admin@gmail.com')->exists()) {
+        $user = new User();
+        $user->name = 'Admin';
+        $user->email = 'admin@gmail.com';
+        $user->password = Hash::make('12345678');
+        $user->save();
+
+        return 'User created successfully';
+    }
+
+    return 'User already exists';
+});
 
 
