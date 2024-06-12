@@ -50,7 +50,7 @@ class AuthController extends Controller
 
     public function refresh()
     {
-        return $this->createNewToken(Auth::refresh());
+        return $this->createNewToken(JWTAuth::refresh());
     }
 
     public function userProfile()
