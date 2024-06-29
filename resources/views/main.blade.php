@@ -1,11 +1,15 @@
 @include('layouts.header')
 <body class="antialiased">
 
-    @include('layouts.nav')
+    <div class="flex flex-col min-h-screen">
+        @include('layouts.nav')
 
-    @yield('content')
+        <div class="flex-1">
+            @yield('content')
+        </div>
 
-    @include('layouts.footer')
+        @include('layouts.footer')
+    </div>
 </body>
 
 </html>

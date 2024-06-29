@@ -2,14 +2,11 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use Illuminate\Database\QueryException;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Illuminate\Auth\AuthenticationException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
@@ -59,6 +56,12 @@ class Handler extends ExceptionHandler
         $this->renderable(function (ModelNotFoundException $e, $request) {
             if ($request->is('api/*')) {
                 return response()->json(['error' => 'Resource not found'], 404);
+            }
+        });
+
+        $this->renderable(function (ValidationException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json(['error' => $e->validator->errors()], 422);
             }
         });
 

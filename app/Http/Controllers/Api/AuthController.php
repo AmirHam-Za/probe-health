@@ -64,17 +64,31 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'phone_number' => 'nullable|string|max:15',
+            'present_address' => 'nullable|string',
+            'permanent_address' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->phone_number = $request->phone_number;
+        $user->present_address = $request->present_address;
+        $user->permanent_address = $request->permanent_address;
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = $file->store('public/images');
+            $user->image = $path;
+        }
+
+        $user->save();
 
         return response()->json(['message' => 'Registration successful', 'user' => $user], 201);
     }
